@@ -6,6 +6,7 @@ import com.hospital.management.repository.AppointmentRepository;
 import com.hospital.management.repository.DoctorRepository;
 import com.hospital.management.repository.PatientRepository;
 import com.hospital.management.repository.PrescriptionRepository;
+import com.hospital.management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +22,22 @@ public class AppointmentService {
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final PrescriptionRepository prescriptionRepository;
-    
+    private final UserRepository userRepository;
+
     private final PatientService patientService;
     private final DoctorService doctorService;
     private final EmailService emailService;
 
     @Transactional
     public AppointmentResponseDTO bookAppointment(Long patientUserId, AppointmentRequestDTO request) {
-        // Find existing patient profile natively created by PatientService if invoked setup already. Otherwise enforce existance.
+        // Auto-create patient profile if it doesn't exist (handles newly registered users)
         Patient patient = patientRepository.findByUserId(patientUserId)
-                .orElseThrow(() -> new RuntimeException("Patient profile not initialized. Update profile first."));
+                .orElseGet(() -> {
+                    User user = userRepository.findById(patientUserId)
+                            .orElseThrow(() -> new RuntimeException("User not found"));
+                    Patient newPatient = Patient.builder().user(user).build();
+                    return patientRepository.save(newPatient);
+                });
 
         Doctor doctor = doctorRepository.findById(request.getDoctorId())
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
