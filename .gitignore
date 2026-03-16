@@ -1,0 +1,66 @@
+# ========================
+# Backend (Spring Boot / Maven)
+# ========================
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.properties
+
+# IDE
+.idea/
+*.iml
+*.iws
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Spring Boot application properties with sensitive data
+# (Uncomment if you want to exclude sensitive config)
+# backend/src/main/resources/application.properties
+
+# ========================
+# Frontend (React / Vite / Node)
+# ========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ========================
+# Logs
+# ========================
+*.log
+backend_logs.txt
+backend_logs_doctor.txt
+backend_logs_doctor2.txt
+logs/
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Docker
+# ========================
+.docker/

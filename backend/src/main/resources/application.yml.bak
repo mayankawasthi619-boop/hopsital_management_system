@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: hospital-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/hospital_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: password # Replace with your MySQL password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+
+jwt:
+  # Base64 encoded 256-bit secret key for JWT signing
+  secret: c2VjcmV0LWtleS1mb3ItaG9zcGl0YWwtbWFuYWdlbWVudC1zeXN0ZW0tMjU2LWJpdC1sZW5ndGgtc3RyaW5nCg==
+  expiration: 86400000 # 24 hours in ms
+  refresh-expiration: 604800000 # 7 days
