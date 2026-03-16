@@ -120,7 +120,7 @@ public class BillingService {
             c1.setPadding(8);
             table.addCell(c1);
 
-            PdfPCell c2 = new PdfPCell(new Phrase("Amount ($)", normBold));
+            PdfPCell c2 = new PdfPCell(new Phrase("Amount (Rs.)", normBold));
             c2.setHorizontalAlignment(Element.ALIGN_CENTER);
             c2.setPadding(8);
             table.addCell(c2);
