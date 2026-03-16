@@ -316,3 +316,348 @@ a {
 a:hover {
   color: var(--primary);
 }
+
+/* ====================================================
+   PAYMENT GATEWAY — RAZORPAY INTEGRATION STYLES
+   ==================================================== */
+
+/* Overlay */
+.payment-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease forwards;
+  padding: 1rem;
+}
+
+/* Modal Card */
+.payment-modal {
+  background: linear-gradient(145deg, rgba(22, 27, 34, 0.97), rgba(13, 17, 23, 0.97));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(124, 58, 237, 0.15);
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-modal::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Modal Header */
+.payment-modal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.payment-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 172, 254, 0.2));
+  border: 1px solid rgba(124, 58, 237, 0.4);
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  color: #a78bfa;
+}
+
+.payment-modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #a78bfa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.25rem;
+}
+
+.payment-modal-subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.payment-close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+.payment-close-btn:hover { color: #fff; }
+
+/* Booking Summary */
+.payment-summary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.payment-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.payment-summary-label {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.payment-summary-value {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.payment-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 0.75rem 0;
+}
+
+.payment-total-row {
+  padding-top: 0.5rem;
+}
+
+.payment-total-label {
+  color: #a78bfa;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.payment-total-amount {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #a78bfa, #00f2fe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Alert / Status Messages */
+.payment-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.payment-alert-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.payment-alert-info {
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  color: #93c5fd;
+}
+
+/* Buttons */
+.payment-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.payment-cancel-btn {
+  flex: 1;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+.payment-cancel-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.payment-cancel-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.payment-pay-btn {
+  flex: 2;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #7c3aed, #4facfe);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+.payment-pay-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+}
+.payment-pay-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinners */
+.payment-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+.payment-spinner-sm {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(147, 197, 253, 0.3);
+  border-top-color: #93c5fd;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Trust Badges */
+.payment-trust {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding-top: 0.25rem;
+}
+
+/* ====================================================
+   DOCTOR FEE PREVIEW CARD (in BookAppointment form)
+   ==================================================== */
+.fee-preview-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(79, 172, 254, 0.08));
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.fee-preview-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fee-preview-avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #7c3aed, #4facfe);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.fee-preview-name {
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.fee-preview-spec {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.fee-preview-right {
+  text-align: right;
+}
+
+.fee-preview-label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fee-preview-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #a78bfa, #00f2fe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ====================================================
+   PAYMENT INFO BANNER (in BookAppointment form)
+   ==================================================== */
+.payment-info-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.payment-info-banner strong {
+  color: #a78bfa;
+}
